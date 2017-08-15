@@ -30,10 +30,18 @@ def service():
     return "Service call succeeded (" + app.name + ")"
 
 
+@app.before_request
+def before_request():
+    b3.start_span()
+
+
+@app.after_request
+def after_request():
+    b3.end_span()
+
+
 if __name__ == "__main__":
 
-    app.before_request(b3.start_span)
-    app.after_request(b3.end_span)
     app.run(
         host="0.0.0.0",
         port=int(port),
