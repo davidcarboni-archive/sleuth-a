@@ -2,3 +2,4 @@ Flask
 Flask-B3
 Flask-Sleuth
 requests
+gunicorn
