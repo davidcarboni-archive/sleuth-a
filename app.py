@@ -9,8 +9,6 @@ import b3
 
 
 app = Flask("Service-a")
-log = logging.getLogger(app.name)
-log.setLevel(logging.INFO)
 
 port = int(os.getenv("PORT", "8001"))
 service_b = os.getenv("SERVICE_B", "http://localhost:8002/")
@@ -18,6 +16,8 @@ service_b = os.getenv("SERVICE_B", "http://localhost:8002/")
 
 @app.route('/')
 def service():
+    log = logging.getLogger(app.name)
+    log.setLevel(logging.INFO)
     log.info(app.name + " has been called.")
 
     with b3.SubSpan() as headers:
@@ -29,8 +29,6 @@ def service():
 
 
 if __name__ == "__main__":
-
-    log.debug("Starting " + app.name)
 
     app.before_request(b3.start_span)
     app.after_request(b3.end_span)
