@@ -19,8 +19,10 @@ def service():
     log = logging.getLogger(app.name)
     log.setLevel(logging.INFO)
     log.info(app.name + " has been called.")
+    log.info("B3 span values: " + str(b3.values()))
 
     with b3.SubSpan() as headers:
+        log.info("B3 subspan values: " + str(b3.values()))
         log.debug("Making a request to service B")
         r = requests.get(service_b, headers=headers)
         log.debug("Service B said: " + str(r.text))
