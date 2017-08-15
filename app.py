@@ -36,8 +36,8 @@ def before_request():
 
 
 @app.after_request
-def after_request():
-    b3.end_span()
+def after_request(response):
+    return b3.end_span(response)
 
 
 if __name__ == "__main__":
