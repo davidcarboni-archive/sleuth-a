@@ -13,6 +13,9 @@ app = Flask("Service-a")
 port = int(os.getenv("PORT", "8001"))
 service_b = os.getenv("SERVICE_B", "http://localhost:8002/")
 
+# Set the root logger to INFO so we can see B3 messages:
+logging.getLogger().setLevel(logging.INFO)
+
 
 @app.route('/')
 def service():
