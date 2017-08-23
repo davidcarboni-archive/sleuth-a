@@ -1,7 +1,7 @@
 import logging
 import sleuth
 
-from flask import Flask
+from flask import Flask, jsonify
 import requests
 import os
 
@@ -30,7 +30,9 @@ def service():
         r = requests.get(service_b, headers=headers)
         log.debug("Service B said: " + str(r.text))
 
-    return "Service call succeeded (" + app.name + ")"
+    result = b3.values()
+    result["service"] = app.name
+    return jsonify(result)
 
 
 @app.before_request
