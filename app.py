@@ -8,7 +8,7 @@ import os
 import b3
 
 
-app = Flask("Service-a")
+app = Flask("sleuth-a")
 
 port = int(os.getenv("PORT", "8001"))
 service_b = os.getenv("SERVICE_B", "http://localhost:8002/")
